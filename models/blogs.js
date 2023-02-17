@@ -34,7 +34,11 @@ module.exports =(seqeulize, DataTyes) =>{
         cat:{
             type: DataTyes.STRING
         },
-    })
+    },
+    {
+        timestamps : false
+    },
+    )
 
     return Blogs
 }

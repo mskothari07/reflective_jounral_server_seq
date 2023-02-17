@@ -19,7 +19,13 @@ module.exports =(seqeulize, DataTyes) =>{
             type: DataTyes.STRING,
             alllowNull:false,
         },
-    })
+        
+    },
+    {
+        timestamps : false
+    },
+    )
 
     return Users
 }
+
