@@ -40,4 +40,12 @@ router.post("/login", async (req,res) =>{
 
 //logout
 
+router.post("/logout", (req, res)=>{
+    res.clearCookie("unlock_token",{
+        sameSite:"none",
+        secure:true
+    })
+    .status(200)
+    .json("User Logged Out")
+})
 module.exports = router
