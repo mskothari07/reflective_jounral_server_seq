@@ -1,51 +1,14 @@
 const express = require("express")
 const router = express.Router()
-const {Users} = require("../models")
-const jwt = require("jsonwebtoken")
 
-// router.get("/", (req,res)=>{
-//     res.send("Hello World")
-// })
+const {register, login, logout} = require("../controllers/auth.js")
 
 
 //register api
-router.post("/register", async (req,res) => {
-    const user = req.body 
-    console.log(user);
-    await Users.create(user)
-    res.json(" Register succes")
-    alert ("User Registered Please login")
-})
-
+router.post("/register", register)
 //login api
-router.post("/login", async (req,res) =>{
-    Users.findOne({
-        where:{
-            email: req.body.email,
-            password: req.body.password,
-        },
-    }).then((user) =>{
-        if(!user){
-            res.status(401).send("Invalid Email or Password")
-        }else{
-            const token = jwt.sign({id : user.id}, "secretkey")
-            res.cookie("unlock_token", token,{
-                httpsOnly:true,            
-            })
-            .status(200)
-            .json("Login success")
-        }
-    })   
-})
-
+router.post("/login",login)
 //logout
+router.post("/logout", logout)
 
-router.post("/logout", (req, res)=>{
-    res.clearCookie("unlock_token",{
-        sameSite:"none",
-        secure:true
-    })
-    .status(200)
-    .json("User Logged Out")
-})
 module.exports = router

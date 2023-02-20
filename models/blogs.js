@@ -22,6 +22,7 @@ module.exports =(seqeulize, DataTyes) =>{
         },
         date:{
             type: DataTyes.DATE,
+            alllowNull:true,
         },
         userid:{
             type: DataTyes.INTEGER,
